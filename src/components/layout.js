@@ -1,14 +1,7 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
 import { useStaticQuery, graphql } from 'gatsby'
-import {
-  container,
-  heading,
-  navLinks,
-  navLinkItem,
-  siteTitle,
-  navLinkText
-} from './layout.module.css'
+
 const Layout = ({ pageTitle, children }) => {
   const data = useStaticQuery(graphql`
     query {
@@ -20,31 +13,33 @@ const Layout = ({ pageTitle, children }) => {
     }  
   `)
   return (
-    <main className={container}>
-      <title>{pageTitle} | {data.site.siteMetadata.title}</title>
-      <p className={siteTitle}>{data.site.siteMetadata.title}</p>
-      <nav>
-        <ul className={navLinks}>
-          <li className={navLinkItem}>
-            <Link to="/" className={navLinkText}>
-              Home
-            </Link>
-          </li>
-          <li className={navLinkItem}>
-            <Link to="/about" className={navLinkText}>
-              About
-            </Link>
-          </li>
-          <li className={navLinkItem}>
-            <Link to="/blog" className={navLinkText}>
-              Blog
-            </Link>
-          </li>
-        </ul>
+    <main className="container">
+
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand columns is-desktop is-vcentered">
+          <Link to="/" className="navbar-item">
+            <title>{pageTitle} | {data.site.siteMetadata.title}</title>
+            <p className="title is-1">{data.site.siteMetadata.title}</p>
+          </Link>
+          <Link to="/" className="navbar-item">
+            Home
+          </Link>
+
+          <Link to="/about" className="navbar-item">
+            About
+          </Link>
+
+          <Link to="/blog" className="navbar-item">
+            Blog
+          </Link>
+        </div>
       </nav>
-      <h1 className={heading}>{pageTitle}</h1>
-      {children}
+      
+    <h1 className="title is-3">{pageTitle}</h1>
+    {children}
+    
     </main>
+    
   )
 }
 export default Layout
